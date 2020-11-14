@@ -52,7 +52,7 @@
       p.gender = gender;
       p.fname = fname;
       p.lname = lname;
-      p.age = 45;
+      p.age = parseInt(calculate_age(dob));
 
       if(typeof height[0] != 'undefined' && typeof height[0].valueQuantity.value != 'undefined' && typeof height[0].valueQuantity.unit != 'undefined') {
         p.height = height[0].valueQuantity.value + ' ' + height[0].valueQuantity.unit;
@@ -99,6 +99,14 @@
     };
   }
 
+  function calculate_age(dob) { 
+    var diff_ms = Date.now() - dob.getTime();
+    var age_dt = new Date(diff_ms); 
+  
+    return Math.abs(age_dt.getUTCFullYear() - 1970);
+}
+  
+  
   function getBloodPressureValue(BPObservations, typeOfPressure) {
     var formattedBPObservations = [];
     BPObservations.forEach(function(observation){
